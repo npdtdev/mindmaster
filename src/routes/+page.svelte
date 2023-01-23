@@ -17,7 +17,8 @@
 	import { PlayResult } from '../types/play-result.enum';
 	import { playResultColor } from '$lib/play-result-color';
 	import { GameResult } from '../types/game-result.enum';
-
+	const max_scroll = 1.1;
+	const min_scroll = 0;
 	const v1 = new Vector3(24, 32, 20);
 	const v2 = new Vector3(24, 32, -30);
 	const cameraLineGeometry = new PlaneGeometry().setFromPoints([v1, v2]);
@@ -93,7 +94,7 @@
 	} = createGame(12, uuid));
 
 	// has to be after creating game
-	$: camera = getNextCamera(viewTurn / turns);
+	$: (camera = getNextCamera(viewTurn / turns)) && id;
 
 	const reset = () => {
 		uuid = useId();
@@ -102,14 +103,30 @@
 	$: viewTurn = $currentTurnStore;
 	let modalInput = false;
 	$: modalInput = $gameResultStore != GameResult.Playing;
+
+	let previousTouch: Touch | null;
 </script>
 
 <svelte:window
 	on:wheel={({ deltaY }) => {
 		const change = camera.frac + deltaY * 0.0001;
-		if (change < 1 && change > 0) {
-			camera = getNextCamera(camera.frac + deltaY * 0.0001);
+		if (change < max_scroll && change > min_scroll) {
+			camera = getNextCamera(change);
 		}
+	}}
+	on:touchmove={(event) => {
+		const touch = event.touches[0];
+		if (previousTouch) {
+			const y = touch.pageY - previousTouch.pageY;
+			const change = camera.frac + y * 0.0005;
+			if (change < max_scroll && change > min_scroll) {
+				camera = getNextCamera(change);
+			}
+		}
+		previousTouch = touch;
+	}}
+	on:touchend={() => {
+		previousTouch = null;
 	}}
 />
 
@@ -273,55 +290,49 @@
 	</div>
 
 	{#if !($gameResultStore != GameResult.Playing)}
-		<div class="collapse absolute bottom-0">
-			<input type="checkbox" bind:checked={menuOpen} />
-			<div class="collapse-title text-xl font-bold mx-auto w-full">&#8963;</div>
-			<div class="collapse-content">
-				<div class="flex flex-row now-wrap gap-2">
-					<button
-						on:click={() => {
-							handleSetMove(Play.One);
-						}}
-						class=" bg-base-100 shadow-xl p-4 mask mask-circle"
-						style="background-color: {playColor.one.color};"
-					/>
-					<button
-						on:click={() => {
-							handleSetMove(Play.Two);
-						}}
-						class=" bg-base-100 shadow-xl p-4 mask mask-circle"
-						style="background-color: {playColor.two.color};"
-					/>
-					<button
-						on:click={() => {
-							handleSetMove(Play.Three);
-						}}
-						class=" bg-base-100 shadow-xl p-4 mask mask-circle"
-						style="background-color: {playColor.three.color};"
-					/>
-					<button
-						on:click={() => {
-							handleSetMove(Play.Four);
-						}}
-						class=" bg-base-100 shadow-xl p-4 mask mask-circle"
-						style="background-color: {playColor.four.color};"
-					/>
-					<button
-						on:click={() => {
-							handleSetMove(Play.Five);
-						}}
-						class=" bg-base-100 shadow-xl p-4 mask mask-circle"
-						style="background-color: {playColor.five.color};"
-					/>
-					<button
-						on:click={() => {
-							handleSetMove(Play.Six);
-						}}
-						class=" bg-base-100 shadow-xl p-4 mask mask-circle"
-						style="background-color: {playColor.six.color};"
-					/>
-				</div>
-			</div>
+		<div class="flex flex-row now-wrap gap-2 absolute bottom-2 p-2">
+			<button
+				on:click={() => {
+					handleSetMove(Play.One);
+				}}
+				class=" bg-base-100 shadow-xl p-4 mask mask-circle"
+				style="background-color: {playColor.one.color};"
+			/>
+			<button
+				on:click={() => {
+					handleSetMove(Play.Two);
+				}}
+				class=" bg-base-100 shadow-xl p-4 mask mask-circle"
+				style="background-color: {playColor.two.color};"
+			/>
+			<button
+				on:click={() => {
+					handleSetMove(Play.Three);
+				}}
+				class=" bg-base-100 shadow-xl p-4 mask mask-circle"
+				style="background-color: {playColor.three.color};"
+			/>
+			<button
+				on:click={() => {
+					handleSetMove(Play.Four);
+				}}
+				class=" bg-base-100 shadow-xl p-4 mask mask-circle"
+				style="background-color: {playColor.four.color};"
+			/>
+			<button
+				on:click={() => {
+					handleSetMove(Play.Five);
+				}}
+				class=" bg-base-100 shadow-xl p-4 mask mask-circle"
+				style="background-color: {playColor.five.color};"
+			/>
+			<button
+				on:click={() => {
+					handleSetMove(Play.Six);
+				}}
+				class=" bg-base-100 shadow-xl p-4 mask mask-circle"
+				style="background-color: {playColor.six.color};"
+			/>
 		</div>
 	{/if}
 </div>
