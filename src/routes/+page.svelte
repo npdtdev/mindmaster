@@ -250,8 +250,10 @@
 		</T.Mesh>
 
 		<!-- Camera path -->
+		<!--
 		<Object3DInstance object={line} />
 		<Object3DInstance object={targetLine} />
+		-->
 	</Canvas>
 
 	<div class="absolute top-5 left-0 flex flex-col items-center p-2 select-none">
@@ -290,7 +292,7 @@
 	</div>
 
 	{#if !($gameResultStore != GameResult.Playing)}
-		<div class="flex flex-row now-wrap gap-2 absolute bottom-2 p-2">
+		<div class="flex flex-row flex-nowrap gap-2 absolute p-2 absolute bottom-5 justify-center w-96">
 			<button
 				on:click={() => {
 					handleSetMove(Play.One);
