@@ -7,7 +7,6 @@
 		T,
 		Object3DInstance
 	} from '@threlte/core';
-
 	import { useId } from '@svelteuidev/composables';
 	import { degToRad } from 'three/src/math/MathUtils';
 	import { createGame } from '$lib/game';
@@ -292,49 +291,53 @@
 	</div>
 
 	{#if !($gameResultStore != GameResult.Playing)}
-		<div class="flex flex-row flex-nowrap gap-2 absolute p-2 absolute bottom-5 justify-center w-96">
-			<button
-				on:click={() => {
-					handleSetMove(Play.One);
-				}}
-				class=" bg-base-100 shadow-xl p-4 mask mask-circle"
-				style="background-color: {playColor.one.color};"
-			/>
-			<button
-				on:click={() => {
-					handleSetMove(Play.Two);
-				}}
-				class=" bg-base-100 shadow-xl p-4 mask mask-circle"
-				style="background-color: {playColor.two.color};"
-			/>
-			<button
-				on:click={() => {
-					handleSetMove(Play.Three);
-				}}
-				class=" bg-base-100 shadow-xl p-4 mask mask-circle"
-				style="background-color: {playColor.three.color};"
-			/>
-			<button
-				on:click={() => {
-					handleSetMove(Play.Four);
-				}}
-				class=" bg-base-100 shadow-xl p-4 mask mask-circle"
-				style="background-color: {playColor.four.color};"
-			/>
-			<button
-				on:click={() => {
-					handleSetMove(Play.Five);
-				}}
-				class=" bg-base-100 shadow-xl p-4 mask mask-circle"
-				style="background-color: {playColor.five.color};"
-			/>
-			<button
-				on:click={() => {
-					handleSetMove(Play.Six);
-				}}
-				class=" bg-base-100 shadow-xl p-4 mask mask-circle"
-				style="background-color: {playColor.six.color};"
-			/>
+		<div class="absolute bottom-20">
+			<div
+				class="flex flex-row gap-2 justify-center p-4 bg-base-200 mx-auto rounded-r-xl drop-shadow-xl"
+			>
+				<button
+					on:click={() => {
+						handleSetMove(Play.One);
+					}}
+					class=" bg-base-100 shadow-xl p-4 mask mask-circle"
+					style="background-color: {playColor.one.color};"
+				/>
+				<button
+					on:click={() => {
+						handleSetMove(Play.Two);
+					}}
+					class=" bg-base-100 shadow-xl p-4 mask mask-circle"
+					style="background-color: {playColor.two.color};"
+				/>
+				<button
+					on:click={() => {
+						handleSetMove(Play.Three);
+					}}
+					class=" bg-base-100 shadow-xl p-4 mask mask-circle"
+					style="background-color: {playColor.three.color};"
+				/>
+				<button
+					on:click={() => {
+						handleSetMove(Play.Four);
+					}}
+					class=" bg-base-100 shadow-xl p-4 mask mask-circle"
+					style="background-color: {playColor.four.color};"
+				/>
+				<button
+					on:click={() => {
+						handleSetMove(Play.Five);
+					}}
+					class=" bg-base-100 shadow-xl p-4 mask mask-circle"
+					style="background-color: {playColor.five.color};"
+				/>
+				<button
+					on:click={() => {
+						handleSetMove(Play.Six);
+					}}
+					class=" bg-base-100 shadow-xl p-4 mask mask-circle"
+					style="background-color: {playColor.six.color};"
+				/>
+			</div>
 		</div>
 	{/if}
 </div>

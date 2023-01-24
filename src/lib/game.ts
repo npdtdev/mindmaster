@@ -86,12 +86,42 @@ export function createGame(t = 12, gameId: string) {
 	};
 }
 
-const getResultFromMove = (targetResult: Move, move: Move): MoveResult => {
+export const getResultFromMove = (targetResult: Move, move: Move): MoveResult => {
+	const tmp: Array<Play> = Object.assign([], targetResult);
+	const res: MoveResult = [PlayResult.None, PlayResult.None, PlayResult.None, PlayResult.None];
+	let idx = 0;
+	// check for strict position and color equal correct, remove option from copy target result.
+	move.forEach((m, i) => {
+		// At position and color check
+		if (m == tmp.at(i) && tmp.at(i) != Play.None && m != Play.None) {
+			// Save and then increment index
+			res[idx++] = PlayResult.Position;
+			// remove from copy target
+			tmp[i] = Play.None;
+		}
+	});
+	// check for color match where results for position where remove, remove first where found from target result
+	move.forEach((m, i) => {
+		if (m == Play.None) {
+			return;
+		}
+		// get index of first match
+		const elIdx = tmp.indexOf(m);
+		if (elIdx != -1) {
+			res[idx++] = PlayResult.Color;
+			tmp[elIdx] = Play.None;
+		}
+	});
+
+	return res.sort();
+
 	return move.map((el, i) => {
-		if (el == targetResult.at(i)) {
+		if (el == tmp.at(i)) {
+			tmp[i] = Play.None;
 			return PlayResult.Position;
 		}
-		if (targetResult.some((v) => v == el)) {
+		if (tmp.some((v) => v == el)) {
+			tmp[i] = Play.None;
 			return PlayResult.Color;
 		}
 		return PlayResult.None;
