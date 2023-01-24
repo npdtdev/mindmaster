@@ -116,4 +116,15 @@ describe('Game tests', () => {
 		];
 		expect(getResultFromMove(targetMove, move).sort()).toStrictEqual(result.sort());
 	});
+	it('tells correct for one scenario it failed', () => {
+		const targetMove: Move = [Play.One, Play.Two, Play.One, Play.Four];
+		const move: Move = [Play.One, Play.Two, Play.Three, Play.Four];
+		const result: MoveResult = [
+			PlayResult.Position,
+			PlayResult.Position,
+			PlayResult.Position,
+			PlayResult.None
+		];
+		expect(getResultFromMove(targetMove, move).sort()).toStrictEqual(result.sort());
+	});
 });

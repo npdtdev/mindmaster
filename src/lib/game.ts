@@ -91,17 +91,19 @@ export const getResultFromMove = (targetResult: Move, move: Move): MoveResult =>
 	const res: MoveResult = [PlayResult.None, PlayResult.None, PlayResult.None, PlayResult.None];
 	let idx = 0;
 	// check for strict position and color equal correct, remove option from copy target result.
-	move.forEach((m, i) => {
+	const restMoves = move.map((m, i) => {
 		// At position and color check
 		if (m == tmp.at(i) && tmp.at(i) != Play.None && m != Play.None) {
 			// Save and then increment index
 			res[idx++] = PlayResult.Position;
 			// remove from copy target
 			tmp[i] = Play.None;
+			return Play.None;
 		}
+		return m;
 	});
 	// check for color match where results for position where remove, remove first where found from target result
-	move.forEach((m, i) => {
+	restMoves.forEach((m) => {
 		if (m == Play.None) {
 			return;
 		}
