@@ -24,14 +24,14 @@ export function createGame(t = 12, gameId: string) {
 	const gameResultStore = derived(
 		[targetResultStore, boardStore, currentTurnStore],
 		([$targetResultStore, $boardStore, $currentTurnStore]) => {
-			if ($currentTurnStore != turns) {
-				if (arrayEquals($boardStore.at($currentTurnStore - 1) ?? [], $targetResultStore)) {
-					return GameResult.Won;
-				} else {
-					return GameResult.Playing;
+			if (arrayEquals($boardStore.at($currentTurnStore - 1) ?? [], $targetResultStore)) {
+				return GameResult.Won;
+			} else {
+				if ($currentTurnStore == turns) {
+					return GameResult.Lost;
 				}
+				return GameResult.Playing;
 			}
-			return GameResult.Lost;
 		},
 		GameResult.Playing
 	);
@@ -114,16 +114,4 @@ export const getResultFromMove = (targetResult: Move, move: Move): MoveResult =>
 	});
 
 	return res.sort();
-
-	return move.map((el, i) => {
-		if (el == tmp.at(i)) {
-			tmp[i] = Play.None;
-			return PlayResult.Position;
-		}
-		if (tmp.some((v) => v == el)) {
-			tmp[i] = Play.None;
-			return PlayResult.Color;
-		}
-		return PlayResult.None;
-	}) as MoveResult;
 };
