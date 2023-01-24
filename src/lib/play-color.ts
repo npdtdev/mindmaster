@@ -16,39 +16,39 @@ export const playColor: {
 	six: IPlay;
 } = {
 	none: {
-		color: '#729EA1',
-		selected_color: '#729EA1',
+		color: '#BFBDC1',
+		selected_color: '#6D6A75',
 		play: Play.None
 	},
 	one: {
-		color: '#729EA1',
-		selected_color: '#729EA1',
+		color: '#AE002B',
+		selected_color: '#75001D',
 		play: Play.One
 	},
 	two: {
-		color: '#474448',
-		selected_color: '#474448',
+		color: '#3cb44b',
+		selected_color: '#2B7F36',
 		play: Play.Two
 	},
 	three: {
-		color: '#EC9192',
-		selected_color: '#EC9192',
+		color: '#ffe119',
+		selected_color: '#AE9A1A',
 		play: Play.Three
 	},
 	four: {
-		color: '#DFBE99',
-		selected_color: '#DFBE99',
+		color: '#0E39D3',
+		selected_color: '#0C2993',
 		play: Play.Four
 	},
 	five: {
-		color: '#B5BD89',
-		selected_color: '#B5BD89',
+		color: '#EE6300',
+		selected_color: '#B54C01',
 
 		play: Play.Five
 	},
 	six: {
-		color: '#DB5375',
-		selected_color: '#DB5375',
+		color: '#f032e6',
+		selected_color: '#A929A2',
 		play: Play.Six
 	}
 };
