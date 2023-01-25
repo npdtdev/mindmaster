@@ -5,11 +5,12 @@ import { generateRandomMove, Play } from '../types/play.enum';
 import { derived, writable, readable, get } from 'svelte/store';
 import type { MoveResult } from '../types/move-result.type';
 import { arrayEquals } from './utils/array-equals';
+import { useId } from '@svelteuidev/composables';
 
-export function createGame(t = 12, gameId: string) {
+export function createGame(t = 12) {
 	const targetResultStore = readable<Move>(generateRandomMove());
 	const turns = t;
-	const id = gameId;
+	let id = useId();
 	const boardStore = writable<Array<Move>>(
 		Array(turns).fill([Play.None, Play.None, Play.None, Play.None])
 	);
@@ -68,6 +69,12 @@ export function createGame(t = 12, gameId: string) {
 		});
 		return true;
 	};
+	const reset = () => {
+		id = useId();
+		boardStore.set(Array(turns).fill([Play.None, Play.None, Play.None, Play.None]));
+		currentTurnStore.set(0);
+		currentMoveStore.set([Play.None, Play.None, Play.None, Play.None]);
+	};
 
 	return {
 		// stores
@@ -80,6 +87,7 @@ export function createGame(t = 12, gameId: string) {
 		// actions
 		setMove,
 		nextTurn,
+		reset,
 		// var
 		turns,
 		id

@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { Canvas, T } from '@threlte/core';
 
-	import { useId } from '@svelteuidev/composables';
 	import { createGame } from '$lib/game';
 	import { Play } from '../types/play.enum';
 	import { Vector3 } from 'three';
@@ -75,7 +74,6 @@
 			frac: frac
 		};
 	};
-	let uuid = useId();
 	$: ({
 		nextTurn,
 		setMove,
@@ -86,11 +84,11 @@
 		currentTurnStore,
 		targetResultStore,
 		turns,
-		id
-	} = createGame(12, uuid));
+		id,
+		reset
+	} = createGame(12));
 	$: setContext('turn', currentTurnStore);
 	$: (camera = getNextCamera(viewTurn / turns)) && id;
-	const reset = () => (uuid = useId());
 	$: viewTurn = $currentTurnStore;
 	let modalInput = false;
 	$: modalInput = $gameResultStore != GameResult.Playing;
