@@ -8,7 +8,7 @@ import { arrayEquals } from './utils/array-equals';
 import { useId } from '@svelteuidev/composables';
 
 export function createGame(t = 12) {
-	const targetResultStore = readable<Move>(generateRandomMove());
+	const targetResultStore = writable<Move>(generateRandomMove());
 	const turns = t;
 	let id = useId();
 	const boardStore = writable<Array<Move>>(
