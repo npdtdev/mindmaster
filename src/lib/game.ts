@@ -74,7 +74,7 @@ export function createGame(t = 12) {
 		boardStore.set(Array(turns).fill([Play.None, Play.None, Play.None, Play.None]));
 		currentTurnStore.set(0);
 		currentMoveStore.set([Play.None, Play.None, Play.None, Play.None]);
-                targetResultStore.set(() => generateRandomMove());
+                targetResultStore.set(generateRandomMove());
 	};
 
 	return {
