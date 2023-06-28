@@ -188,6 +188,7 @@
 					on:click={() => {
 						handleSetMove(Play.One);
 					}}
+					aria-label="Set to one"
 					class=" bg-base-100 shadow-xl p-4 mask mask-circle"
 					style="background-color: {playColor.one.color};"
 				/>
@@ -195,6 +196,7 @@
 					on:click={() => {
 						handleSetMove(Play.Two);
 					}}
+					aria-label="Set to two"
 					class=" bg-base-100 shadow-xl p-4 mask mask-circle"
 					style="background-color: {playColor.two.color};"
 				/>
@@ -202,6 +204,7 @@
 					on:click={() => {
 						handleSetMove(Play.Three);
 					}}
+					aria-label="Set to three"
 					class=" bg-base-100 shadow-xl p-4 mask mask-circle"
 					style="background-color: {playColor.three.color};"
 				/>
@@ -209,6 +212,7 @@
 					on:click={() => {
 						handleSetMove(Play.Four);
 					}}
+					aria-label="Set to four"
 					class=" bg-base-100 shadow-xl p-4 mask mask-circle"
 					style="background-color: {playColor.four.color};"
 				/>
@@ -216,6 +220,7 @@
 					on:click={() => {
 						handleSetMove(Play.Five);
 					}}
+					aria-label="Set to five"
 					class=" bg-base-100 shadow-xl p-4 mask mask-circle"
 					style="background-color: {playColor.five.color};"
 				/>
@@ -223,6 +228,7 @@
 					on:click={() => {
 						handleSetMove(Play.Six);
 					}}
+					aria-label="Set to six"
 					class=" bg-base-100 shadow-xl p-4 mask mask-circle"
 					style="background-color: {playColor.six.color};"
 				/>
