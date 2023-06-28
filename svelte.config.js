@@ -11,7 +11,13 @@ const config = {
 	preprocess: seqPreprocessor([preprocess(), preprocessThrelte(), vitePreprocess()]),
 
 	kit: {
-		adapter: adapter()
+		adapter: adapter(),
+		alias: {
+			$lib: 'src/lib',
+			$components: 'src/lib/components',
+			$types: 'src/types',
+			$utils: 'src/lib/utils'
+		}
 	}
 };
 

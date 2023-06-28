@@ -1,16 +1,12 @@
-import { PlayResult } from '../types/play-result.enum';
-import { GameResult } from '../types/game-result.enum';
-import type { Move } from '../types/move.type';
-import { generateRandomMove, Play } from '../types/play.enum';
 import { derived, writable, readable, get } from 'svelte/store';
-import type { MoveResult } from '../types/move-result.type';
-import { arrayEquals } from './utils/array-equals';
-import { useId } from '@svelteuidev/composables';
+import { GameResult, PlayResult, type Move, type MoveResult, Play } from '$types';
+import { arrayEquals, generateRandomMove } from '$utils';
+import { v4 as uuidv4 } from 'uuid';
 
 export function createGame(t = 12) {
 	const targetResultStore = writable<Move>(generateRandomMove());
 	const turns = t;
-	let id = useId();
+	let id = uuidv4();
 	const boardStore = writable<Array<Move>>(
 		Array(turns).fill([Play.None, Play.None, Play.None, Play.None])
 	);
@@ -70,11 +66,11 @@ export function createGame(t = 12) {
 		return true;
 	};
 	const reset = () => {
-		id = useId();
+		id = uuidv4();
 		boardStore.set(Array(turns).fill([Play.None, Play.None, Play.None, Play.None]));
 		currentTurnStore.set(0);
 		currentMoveStore.set([Play.None, Play.None, Play.None, Play.None]);
-                targetResultStore.set(generateRandomMove());
+		targetResultStore.set(generateRandomMove());
 	};
 
 	return {

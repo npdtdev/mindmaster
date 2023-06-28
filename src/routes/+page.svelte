@@ -2,19 +2,17 @@
 	import { Canvas, T } from '@threlte/core';
 
 	import { createGame } from '$lib/game';
-	import { Play } from '../types/play.enum';
+	import { Play, PlayResult, GameResult } from '$types';
 	import { Vector3 } from 'three';
 	import { playColor } from '$lib/play-color';
-	import { PlayResult } from '../types/play-result.enum';
-	import { GameResult } from '../types/game-result.enum';
-	import Light from './Light.svelte';
-	import Indicator from './Indicator.svelte';
-	import Floor from './Floor.svelte';
-	import GuessResult from './GuessResult.svelte';
-	import Instructions from './Instructions.svelte';
+	import Light from '$components/Light.svelte';
+	import Indicator from '$components/Indicator.svelte';
+	import Floor from '$components/Floor.svelte';
+	import GuessResult from '$components/GuessResult.svelte';
+	import Instructions from '$components/Instructions.svelte';
 	import { setContext } from 'svelte';
-	import Guess from './Guess.svelte';
-	import Camera from './Camera.svelte';
+	import Guess from '$components/Guess.svelte';
+	import Camera from '$components/Camera.svelte';
 	import { writable } from 'svelte/store';
 
 	const scaleVector = new Vector3(1, 1, 1);

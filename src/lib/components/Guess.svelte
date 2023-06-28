@@ -3,7 +3,7 @@
 	import { InteractiveObject, T } from '@threlte/core';
 	import { getContext } from 'svelte';
 	import type { Writable } from 'svelte/store';
-	import { Play } from '../types/play.enum';
+	import { Play } from '$types';
 
 	export let position: [x: number, y: number, z: number] = [0, 0, 0];
 	export let scale: [x: number, y: number, z: number] = [1, 1, 1];

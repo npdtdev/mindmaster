@@ -11,11 +11,11 @@ export const playResultColor: {
 	position: IPlayResultColor;
 } = {
 	none: {
-		color: '#',
+		color: '#fff',
 		boardResult: PlayResult.None
 	},
 	color: {
-		color: '#0A2463',
+		color: '#0e50f0',
 		boardResult: PlayResult.Color
 	},
 	position: {
